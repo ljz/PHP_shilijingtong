@@ -25,10 +25,23 @@ while(list($key,$value) =each( $student))
   $table .="<tr><th>".$value[0]."</th><th>".$value[1]."</th><th>".$value[2]."</th></tr>";
 }
 echo $table;
+
+for($i=0;i<count($student);i++)
+{
+  $table.= $student[0][0].$student0[][1];
+}
+
+
+foreach($student as $key=>$valu)
+{
+  $valu[0].$valu[1];
+}
 ?>
 /*总结：
 1.list()函数是将一个一维数组的读取每个元素出来。
 2.each()函数返回数组的键值对。
+3.for(){}
+4.foreach(){}
 */
 
 
