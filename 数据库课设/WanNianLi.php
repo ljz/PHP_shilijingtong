@@ -93,6 +93,45 @@ function DeleteHtml()
 
 }
 
+function SelectHtml()
+{
+
+
+	//设置链接MYSQL数据的变量
+	$host = "localhost";
+	$user = "root";
+	$pass = "1qaz2wsx";
+	$db = "WanNianLi";
+
+	//建立链接对象，并设置链接数据库的类型
+	$conn = &ADONewConnection('mysql');
+	//链接数据库
+	$conn->Connect($host,$user,$pass,$db);
+	//显示调试信息
+	//$conn->debug();
+	//设置字符
+	$conn->Execute("SET NAMES utf8");
+	//设置SQL语句
+	$sql = "select * from event WHERE event = ".$_POST["event"]." limit 0,15";
+	//执行SQL语句
+	$result = $conn->Execute($sql);
+	if($result == false)
+	{
+		echo "<pre>".$conn->ErrorMsg()."</pre>";
+	}else{
+	  $table = "<table border='1'> <tr> <th>ID</th><th>名称</th><th>time</th><th>address</th><th>grade</th><th>remark </th></tr>";
+	  while($row = $result->FetchRow())
+	  {
+	      $table .= "<tr><td>".$row[0]."</td><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>".$row[5]."</td><td>".$row[6]."</td></tr>";
+	    }
+	  $table .= "</table>";
+	  echo $table;
+	}
+	$conn->close();
+
+
+
+}
 
 //设置SQL语句
 if(isset($_POST["submit"]))
@@ -222,7 +261,7 @@ case "delete":
 	DeleteHtml();
 	break;
 case "select":
-	echo "zheshichazhao";
+	SelectHtml();
 	break;
 }
 
